@@ -23,3 +23,12 @@ class Crosshair:
 
     def update_position(self, pos):
         self.rect.center = pos
+
+class Menu:
+    def draw(self, screen, game_state, score, font):
+        if game_state == "MENU":
+            text = font.render("DUCK HUNT: PRESS 'S' TO START", True, (0, 0, 0))
+            screen.blit(text, (220, 280))
+        elif game_state == "GAMEOVER":
+            text = font.render(f"GAME OVER! HITS: {score.hits} - PRESS 'R' TO RESTART", True, (200, 0, 0))
+            screen.blit(text, (180, 280))
