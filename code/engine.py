@@ -29,3 +29,7 @@ class Game:
 
         self.score = Score()
         self.font = pygame.font.SysFont("Verdana", 24, bold=True)
+
+    def restart(self):
+        self.score = Score()
+        self.state = "PLAYING"
