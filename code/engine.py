@@ -26,3 +26,6 @@ class Game:
         self.clock = pygame.time.Clock()
         self.running = True
         self.state = "MENU"
+
+        self.score = Score()
+        self.font = pygame.font.SysFont("Verdana", 24, bold=True)
