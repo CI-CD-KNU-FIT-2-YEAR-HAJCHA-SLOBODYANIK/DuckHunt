@@ -30,3 +30,20 @@ def main():
                         break
                 if not hit_found:
                     game.score.increment_miss()
+
+        game.screen.fill((100, 150, 230))
+
+        if game.state == "MENU":
+            menu.draw_overlay(game.screen, "MENU", game.font)
+        elif game.state == "PLAYING":
+            if game.score.update_time(dt):
+                game.state = "GAMEOVER"
+            crosshair.update_position(mouse_pos)
+            for duck in ducks:
+                duck.move()
+                if duck.rect.x > 850: duck.spawn()
+                game.screen.blit(duck.image, duck.rect)
+            pygame.draw.circle(game.screen, (255, 0, 0), mouse_pos, 15, 3)
+            menu.draw_fancy_ui(game.screen, game.score, game.font)
+        elif game.state == "GAMEOVER":
+            menu.draw_overlay(game.screen, "GAMEOVER", game.font, game.score)
