@@ -20,3 +20,13 @@ def main():
                     game.state = "PLAYING"
                 if game.state == "GAMEOVER" and event.key == pygame.K_r:
                     game.restart()
+            if event.type == pygame.MOUSEBUTTONDOWN and game.state == "PLAYING":
+                hit_found = False
+                for duck in ducks:
+                    if duck.rect.collidepoint(mouse_pos):
+                        game.score.increment_hit()
+                        duck.spawn()
+                        hit_found = True
+                        break
+                if not hit_found:
+                    game.score.increment_miss()
