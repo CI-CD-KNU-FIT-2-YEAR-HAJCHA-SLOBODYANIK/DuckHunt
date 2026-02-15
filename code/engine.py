@@ -18,3 +18,11 @@ class Score:
     def update_time(self, dt):
         self.time_left -= dt
         return self.time_left <= 0
+
+class Game:
+    def __init__(self):
+        pygame.init()
+        self.screen = pygame.display.set_mode((800, 600))
+        self.clock = pygame.time.Clock()
+        self.running = True
+        self.state = "MENU"
