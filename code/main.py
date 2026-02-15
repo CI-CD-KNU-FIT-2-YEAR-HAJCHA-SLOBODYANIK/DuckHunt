@@ -47,3 +47,9 @@ def main():
             menu.draw_fancy_ui(game.screen, game.score, game.font)
         elif game.state == "GAMEOVER":
             menu.draw_overlay(game.screen, "GAMEOVER", game.font, game.score)
+
+        pygame.display.flip()
+    pygame.quit()
+
+if __name__ == "__main__":
+    main()
