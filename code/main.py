@@ -15,3 +15,8 @@ def main():
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 game.running = False
+            if event.type == pygame.KEYDOWN:
+                if game.state == "MENU" and event.key == pygame.K_s:
+                    game.state = "PLAYING"
+                if game.state == "GAMEOVER" and event.key == pygame.K_r:
+                    game.restart()
