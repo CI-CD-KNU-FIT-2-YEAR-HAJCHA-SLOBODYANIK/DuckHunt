@@ -16,13 +16,13 @@ def main():
     cloud_timer = 0.0
     
     cloud_fb = Animation(CLOUD_PATH, 0, (120, 120), rotate_deg=90)
-    fly_fb, dead_fb = None, None  # Их присваиваю потом ибо размер не конст
+    fly_fb, dead_fb = None, None  # Їх присвоюю потім, бо розмір не конст
 
     while game.running:
         dt = game.clock.tick(60) / 1000.0
         mouse_pos = pygame.mouse.get_pos()
 
-        # --- ЛОГИКА ОБЛАКОВ (Активна всегда) ---
+        # --- ЛОГІКА ХМАР (Активна завжди) ---
         cloud_timer += dt
         if cloud_timer >= 4.0:
             v_x = random.uniform(60.0, 120.0) 

@@ -1,13 +1,13 @@
 import pygame
 
-# Структура для хранения параметров сложности
+# Структура для зберігання параметрів складності
 class Difficulty:
     def __init__(self, name, count, speed, size, color):
         self.name = name
-        self.count = count  # Целевое колво уток на экране
+        self.count = count  # Цільова кількість качок на екрані
         self.speed_mult = speed
         self.size_mult = size
-        self.color = color  # Цвет для меню настроек
+        self.color = color  # Колір для меню налаштувань
 
 class Score:
     def __init__(self):
@@ -40,8 +40,8 @@ class Game:
         
         self.levels = [
             Difficulty("ЛЕГКИЙ", 6, 0.75, 1.15, (46, 204, 113)),
-            Difficulty("СРЕДНИЙ", 4, 1.0, 1.0, (241, 196, 15)),
-            Difficulty("СЛОЖНЫЙ", 4, 1.33, 0.85, (231, 76, 60))
+            Difficulty("СЕРЕДНІЙ", 4, 1.0, 1.0, (241, 196, 15)),
+            Difficulty("СКЛАДНИЙ", 4, 1.33, 0.85, (231, 76, 60))
         ]
         self.current_diff_idx = 1
 
@@ -49,6 +49,5 @@ class Game:
         self.score = Score()
         self.state = "PLAYING"
 
-        
     def get_diff(self):
-        return self.levels[self.current_diff_idx] # Возврат активной сложности
+        return self.levels[self.current_diff_idx] # Повернення активної складності

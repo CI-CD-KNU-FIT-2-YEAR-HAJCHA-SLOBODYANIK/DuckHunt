@@ -2,7 +2,7 @@ import pygame
 import random
 import math
 
-# Анимация-гиф. Похоже на флипбук
+# Анімація-гіф. Схоже на фліпбук
 class Animation:
     def __init__(self, paths, frame_time, target_size, flip_h=False, rotate_deg=0):
         self.frames = []
@@ -26,15 +26,15 @@ class Animation:
         index = int(time / self.frame_time) % len(self.frames)
         return self.frames[index]
 
-# Визуальная декаль. Просто визуальный эффект с некоторой логикой движения. Расчитано на прямолинейное движение или на падение/взлет.
+# Візуальна декаль. Просто візуальний ефект із деякою логікою руху. Розраховано на прямолінійний рух або на падіння/зліт.
 class VisualDecal:
     def __init__(self, x, y, impulse_x, impulse_y, weight, resistance, animation):
         self.pos = pygame.Vector2(x, y)
         self.velocity = pygame.Vector2(impulse_x, impulse_y)
-        self.weight = weight  # Положительный вес дает ускорение вниз
-        self.resistance = resistance  # Вычитает (НЕ МНОЖИТ) СКОРОСТЬ не меняя НАПРАВЛЕНИЕ
+        self.weight = weight  # Позитивна вага дає прискорення вниз
+        self.resistance = resistance  # Віднімає (НЕ МНОЖИТЬ) ШВИДКІСТЬ не змінюючи НАПРЯМОК
         self.animation = animation
-        self.active = True # Статус активности
+        self.active = True # Статус активності
         
         self.time = 0
 
@@ -47,7 +47,6 @@ class VisualDecal:
         self.pos += self.velocity * dt
         self.time += dt
 
-
         speed = self.velocity.length()
         if speed > 0:
             reduction = self.resistance * dt
@@ -59,7 +58,7 @@ class VisualDecal:
 
         self.velocity.y += self.weight * dt
         
-        if (self.pos.x < -self.diag or self.pos.x > 800 + self.diag or  # Если окно не 800 на 600 то менять тут обязательно!!!
+        if (self.pos.x < -self.diag or self.pos.x > 800 + self.diag or  # Якщо вікно не 800 на 600, то змінювати тут обов'язково!!!
             self.pos.y < -self.diag or self.pos.y > 600 + self.diag):
             self.active = False
 
@@ -84,15 +83,15 @@ class Duck:
     def __init__(self, speed_mult, size_mult, animation):
         self.time = 0
         self.speed_mult = speed_mult
-        self.animation = animation # Ссылка на флипбук
-        self.rect = pygame.Rect(0, 0, int(60 * size_mult), int(45 * size_mult))  # По умолчанию хитбокс 60 на 45
+        self.animation = animation # Посилання на фліпбук
+        self.rect = pygame.Rect(0, 0, int(60 * size_mult), int(45 * size_mult))  # Типово хітбокс 60 на 45
         self.spawn()
 
     def spawn(self):
         self.time = 0
         self.rect.x = random.randint(-150, -60)
         self.rect.y = random.randint(50, 400)
-        self.velocity = [random.randint(5, 8) * self.speed_mult, random.uniform(-1, 1)]  # Уменьшил на 1 диапазон скорости Х
+        self.velocity = [random.randint(5, 8) * self.speed_mult, random.uniform(-1, 1)]  # Зменшив на 1 діапазон швидкості Х
     
     def move(self):
         self.rect.x += self.velocity[0]
@@ -113,7 +112,6 @@ class Menu:
         self.dark = (30, 30, 40)
         self.white = (255, 255, 255)
 
-
         self.btn_start = pygame.Rect(310, 185, 180, 50)
         self.btn_opts = pygame.Rect(310, 305, 180, 50)
 
@@ -122,16 +120,16 @@ class Menu:
         self.btn_exit = pygame.Rect(310, 450, 180, 50)
 
     def draw_fancy_ui(self, screen, score_obj, font):
-        # Нижняя панель
+        # Нижня панель
         pygame.draw.rect(screen, self.dark, (0, 530, 800, 70))
         pygame.draw.line(screen, self.gold, (0, 530), (800, 530), 4)
         
-        # Полоска времени
+        # Смужка часу
         time_ratio = max(0, score_obj.time_left / 60.0)
         pygame.draw.rect(screen, (60, 60, 60), (300, 555, 200, 20))
+        # Текст
         pygame.draw.rect(screen, (220, 20, 60), (300, 555, int(200 * time_ratio), 20))
         
-        # Текст
         score_txt = font.render(f"SCORE: {score_obj.points:05}", True, self.gold)
         hits_txt = font.render(f"HITS: {score_obj.hits}", True, self.white)
         screen.blit(score_txt, (30, 550))
@@ -145,7 +143,6 @@ class Menu:
         elif state == "SETTINGS":
             self.draw_settings(screen, font, current_idx, levels)
 
-
     def draw_main(self, screen, font, current_idx, levels):
         screen.fill((20, 20, 30))
 
@@ -155,7 +152,7 @@ class Menu:
             screen.blit(t, t.get_rect(center=btn.center))
 
         diff_name = levels[current_idx].name
-        diff_txt = font.render(f"Уровень сложности - {diff_name}", True, self.white)
+        diff_txt = font.render(f"Рівень складності - {diff_name}", True, self.white)
         screen.blit(diff_txt, (240, 260))
 
     def draw_end(self, screen, font, score=None):
@@ -181,5 +178,5 @@ class Menu:
             screen.blit(txt, txt.get_rect(center=rect.center))
     
         pygame.draw.rect(screen, self.gold, self.btn_exit, 1)
-        exit_txt = font.render("ВЫХОД", True, self.gold)
+        exit_txt = font.render("ВИХІД", True, self.gold)
         screen.blit(exit_txt, exit_txt.get_rect(center=self.btn_exit.center))
