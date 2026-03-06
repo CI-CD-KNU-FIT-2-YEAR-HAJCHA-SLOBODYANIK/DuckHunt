@@ -1,0 +1,17 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.env
+
+# Тести та звіти
+.pytest_cache/
+reports/
+.flake8_reports/
+*.html
+
+# Pygame/IDE
+.vscode/
+.idea/
+.DS_Store
