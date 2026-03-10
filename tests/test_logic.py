@@ -28,3 +28,11 @@ def test_score_update_time_expired(score_instance):
     """Перевірка, що повертає True, коли час виходить"""
     is_expired = score_instance.update_time(60.1)
     assert is_expired is True
+
+@pytest.fixture
+def game_instance():
+    """Фікстура для Game з моками для GUI та зображень"""
+    with patch('pygame.display.set_mode'), \
+         patch('pygame.font.SysFont'), \
+         patch('pygame.image.load'):
+        return Game()
