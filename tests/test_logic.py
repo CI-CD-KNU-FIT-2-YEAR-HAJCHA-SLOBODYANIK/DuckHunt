@@ -36,3 +36,11 @@ def game_instance():
          patch('pygame.font.SysFont'), \
          patch('pygame.image.load'):
         return Game()
+    
+def test_difficulty_initialization(game_instance):
+    """Перевірка коректності рівнів складності"""
+    levels = game_instance.levels
+    assert len(levels) == 3
+    assert levels[0].name == "ЛЕГКИЙ"
+    assert levels[0].speed_mult == 0.75
+    assert levels[2].speed_mult > 1.0
