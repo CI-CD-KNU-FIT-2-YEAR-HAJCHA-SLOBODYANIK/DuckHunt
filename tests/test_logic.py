@@ -44,3 +44,9 @@ def test_difficulty_initialization(game_instance):
     assert levels[0].name == "ЛЕГКИЙ"
     assert levels[0].speed_mult == 0.75
     assert levels[2].speed_mult > 1.0
+
+def test_get_diff_method(game_instance):
+    """Перевірка методу отримання активної складності"""
+    game_instance.current_diff_idx = 2
+    current = game_instance.get_diff()
+    assert current.name == "СКЛАДНИЙ"
