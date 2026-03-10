@@ -18,3 +18,13 @@ def test_score_increment_hit(score_instance):
     
     assert score_instance.points == initial_points + 100
     assert score_instance.hits == 1
+
+def test_score_update_time_not_expired(score_instance):
+    """Перевірка, що час не вичерпано при dt=1.0"""
+    is_expired = score_instance.update_time(1.0)
+    assert is_expired is False
+
+def test_score_update_time_expired(score_instance):
+    """Перевірка, що повертає True, коли час виходить"""
+    is_expired = score_instance.update_time(60.1)
+    assert is_expired is True
