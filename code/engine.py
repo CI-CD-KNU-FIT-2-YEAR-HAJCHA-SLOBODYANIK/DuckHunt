@@ -40,7 +40,7 @@ class Game:
         
         self.levels = [
             Difficulty("ЛЕГКИЙ", 6, 0.75, 1.15, (46, 204, 113)),
-            Difficulty("СЕРЕДНІЙ", 4, 1.0, 1.0, (241, 196, 15)),
+            Difficulty("СЕРЕДНІЙ", 4, 1.0, 1.0, (219, 231, 15)),
             Difficulty("СКЛАДНИЙ", 4, 1.33, 0.85, (231, 76, 60))
         ]
         self.current_diff_idx = 1
