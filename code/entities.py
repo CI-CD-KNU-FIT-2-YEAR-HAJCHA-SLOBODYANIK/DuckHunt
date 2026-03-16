@@ -119,10 +119,12 @@ class Menu:
                           pygame.Rect(520, 300, 180, 50)]
         self.btn_exit = pygame.Rect(310, 450, 180, 50)
 
+        self.panel_height = 70 # Редагувати тільки тут
     def draw_fancy_ui(self, screen, score_obj, font):
+        y_pos = screen.get_height() - self.panel_height
         # Нижня панель
-        pygame.draw.rect(screen, self.dark, (0, 530, 800, 70))
-        pygame.draw.line(screen, self.gold, (0, 530), (800, 530), 4)
+        pygame.draw.rect(screen, self.dark, (0, y_pos, screen.get_width(), self.panel_height))
+        pygame.draw.line(screen, self.gold, (0, y_pos), (screen.get_width(), y_pos), 4)
         
         # Смужка часу
         time_ratio = max(0, score_obj.time_left / 60.0)

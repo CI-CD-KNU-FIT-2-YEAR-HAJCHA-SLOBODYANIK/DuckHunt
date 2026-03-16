@@ -101,7 +101,7 @@ def main():
                 duck.move()
                 duck.update(dt)
 
-                if duck.rect.x > 850: duck.spawn()
+                if (duck.rect.x > 850 or duck.rect.y > 850 or duck.rect.y < menu.panel_height - 50): duck.spawn()
                 duck.draw(game.screen)
             
             pygame.draw.circle(game.screen, (255, 0, 0), mouse_pos, 15, 3)
