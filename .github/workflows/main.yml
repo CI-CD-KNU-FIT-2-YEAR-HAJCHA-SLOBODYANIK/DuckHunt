@@ -1,0 +1,50 @@
+name: Duck Hunt CI
+
+on:
+  push:
+    branches: [ "main", "master" ]
+  pull_request:
+    branches: [ "main", "master" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Set up Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: "3.10"
+
+    - name: Install System Dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y libsdl2-dev libsdl2-image-dev libsdl2-mixer-dev libsdl2-ttf-dev
+
+    - name: Install Python Dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+        pip install pytest-html flake8-html
+
+    - name: Run Linting (Flake8)
+      run: |
+        flake8 . --format=html --htmldir=reports/flake8_report || true
+
+    - name: Run Tests (Pytest)
+      env:
+        SDL_VIDEODRIVER: dummy
+        SDL_AUDIODRIVER: dummy
+        PYTHONPATH: ${{ github.workspace }}/code
+      run: |
+        pytest tests/ --html=reports/pytest_report.html --self-contained-html
+
+    - name: Upload Artifacts
+      uses: actions/upload-artifact@v4
+      if: always()
+      with:
+        name: quality-reports
+        path: reports/
