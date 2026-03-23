@@ -4,9 +4,9 @@ import math
 from engine import Game
 from entities import Duck, Menu, VisualDecal, Animation
 
-FLY_PATHS = [f"assets/duck_fly_{i}.png" for i in range(1, 7)]
-DEAD_PATHS = [f"assets/duck_dead_{i}.png" for i in range(1, 3)]
-CLOUD_PATH = ["assets/cloud.png"]
+FLY_PATHS = [f"code/assets/duck_fly_{i}.png" for i in range(1, 7)]
+DEAD_PATHS = [f"code/assets/duck_dead_{i}.png" for i in range(1, 3)]
+CLOUD_PATH = ["code/assets/cloud.png"]
 
 def main():
     game = Game()
